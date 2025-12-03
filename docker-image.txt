@@ -1,0 +1,78 @@
+✅ 1. Create Project Folder
+mkdir mydockerapp
+cd mydockerapp
+
+✅ 2. Create a Dockerfile
+
+Create a file named:
+
+Dockerfile
+
+
+Paste this simple Node.js HTTP server (very common in exams):
+
+FROM node:18
+
+WORKDIR /app
+
+COPY server.js .
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
+
+✅ 3. Create server.js
+
+Create:
+
+server.js
+
+
+Paste:
+
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.end("Hello Boss! Docker Image Working!");
+});
+
+server.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
+
+✅ 4. Build the Docker Image
+
+Run:
+
+docker build -t myapp-image .
+
+
+myapp-image = image name
+
+To check:
+
+docker images
+
+✅ 5. Run the Container
+
+Run:
+
+docker run -d -p 3000:3000 --name mycontainer myapp-image
+
+
+Now container is running → mapped to localhost.
+
+Check running:
+
+docker ps
+
+✅ 6. Access the Image in Localhost
+
+Open browser:
+
+http://localhost:3000
+
+
+You will see:
+
+Hello Boss! Docker Image Working!
